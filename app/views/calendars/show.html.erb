@@ -1,1 +1,9 @@
-<h1><%= @calendar.title %> Calendar</h1>
+<h1><%= link_to 'Calendars', calendars_path %> &gt; <%= @calendar.title %> Calendar</h1>
+<div id="calendar"></div>
+
+<script>
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+    })
+});
+</script>
