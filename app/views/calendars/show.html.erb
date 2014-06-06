@@ -16,7 +16,11 @@ $(document).ready(function() {
       minTime:      '08:00:00',
       maxTime:      '22:00:00',
 
-      events:       <%= raw @events.to_json %>
+      events:       <%= raw @events.to_json %>,
+
+      eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
+        alert(event.start);
+      }
     })
 });
 </script>
