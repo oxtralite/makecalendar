@@ -6,11 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Calendar.create!(title: 'NY.js Meetups', timezone: 'America/New_York') unless Calendar.where(title: 'NY.js Meetups').present?
-Calendar.create!(title: 'Chicago.js Meetups', timezone: 'America/Chicago') unless Calendar.where(title: 'Chicago.js Meetups').present?
-calendar = Calendar.where(title: 'Personal').present?
-unless calendar.present?
-  calendar = Calendar.create!(title: 'Personal', timezone: 'America/Denver')
-  calendar.events.create!(title: 'Attend Logan.js meeting', start: "2014-06-05 19:09:47", end: "2014-06-05 20:09:47")
-  calendar.events.create!(title: 'Prepare my Utah.js talk', start: "2014-06-05 20:09:47", end: "2014-06-05 21:09:47")
+def create_calendar(city, timezone)
+  title = "#{city}.js Meetups"
+  calendar = Calendar.create!(title: title, timezone: timezone)
+  calendar.events.create!(title: "Attend #{city}.js meeting", start: "2014-06-05 18:00:00", end: "2014-06-05 19:00:00")
+  calendar.events.create!(title: "Go to dinner", start: "2014-06-05 19:30:00", end: "2014-06-05 20:30:00")
 end
+
+Calendar.destroy_all
+create_calendar('NY','America/New_York')
+create_calendar('Chicago','America/Chicago')
+create_calendar('SLC','America/Denver')
