@@ -2,8 +2,36 @@
 <div id="calendar"></div>
 
 <script>
+function todayAt(hr){
+  var date = new Date();
+  date.setHours(hr);
+  date.setMinutes(0);
+  return date;
+}
 $(document).ready(function() {
     $('#calendar').fullCalendar({
+      defaultView:  'agendaWeek',
+      allDaySlot:   false,
+
+      header:       {center: 'agendaDay,agendaWeek,month'},
+
+      editable:     'true',
+
+      minTime:      '08:00:00',
+      maxTime:      '22:00:00',
+
+      events:       [
+        {
+          title:  'Deliver Utah.js talk',
+          start:  todayAt(17),
+          end:    todayAt(18)
+        },
+        {
+          title:  'Go to dinner',
+          start:  todayAt(19),
+          end:    todayAt(20)
+        }
+      ]
     })
 });
 </script>
