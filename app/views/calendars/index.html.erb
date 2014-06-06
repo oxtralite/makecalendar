@@ -1,0 +1,6 @@
+<h1>Calendars</h1>
+<ul>
+<% @calendars.each do |calendar| %>
+<li><%= link_to calendar.title, calendar_path(calendar) %></li>
+<% end %>
+</ul>
