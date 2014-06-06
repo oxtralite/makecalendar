@@ -13,4 +13,6 @@
 //= require lib/jquery.min
 //= require lib/jquery-ui.custom.min
 //= require lib/moment.min
+//= require lib/moment-timezone
+//= require lib/moment-timezone-data
 //= require lib/fullcalendar

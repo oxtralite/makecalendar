@@ -4,6 +4,21 @@
 <div id="calendar"></div>
 
 <script>
+var calendarTZ = "<%= @calendar.timezone %>";
+
+function toCalendarTZ(date){
+  var m = moment(date);
+
+  // get a moment in the timezone of the calendar
+  var zone = moment(m).tz(calendarTZ);
+
+  // build a date string by swapping the browser timezone with the calendar timezone
+  var dateString = m.format('ddd MMM D YYYY HH:mm:ss') + " GMT-0" + (zone.zone()*100/60) + " (" + zone.zoneAbbr() + ")";
+
+  // parse the date string, converting it back to the browser timezone
+  return moment(dateString);
+}
+
 $(document).ready(function() {
     $('#calendar').fullCalendar({
       defaultView:  'agendaWeek',
@@ -19,8 +34,9 @@ $(document).ready(function() {
       events:       <%= raw @events.to_json %>,
 
       eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
-        alert(event.start);
+        alert("Browser: " + event.start.toDate() + '\n' + "Calendar: " + toCalendarTZ(event.start).toDate());
       }
+
     })
 });
 </script>
